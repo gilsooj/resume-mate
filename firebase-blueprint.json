@@ -1,0 +1,57 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with preferences and personal details.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "targetJob": { "type": "string" },
+        "strength": { "type": "string" },
+        "experience": { "type": "string" },
+        "tonePreference": { "type": "string" }
+      }
+    },
+    "UserResume": {
+      "title": "UserResume",
+      "description": "A draft resume stored under a user's account.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "paragraphs": { "type": "array" },
+        "recommendation": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "GlobalResume": {
+      "title": "GlobalResume",
+      "description": "A resume submitted to the global collection.",
+      "type": "object",
+      "properties": {
+        "jobTitle": { "type": "string" },
+        "strength": { "type": "string" },
+        "experience": { "type": "string" },
+        "content": { "type": "string" },
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["jobTitle", "strength", "experience", "content", "userId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profile configurations"
+    },
+    "users/{userId}/resumes/{resumeId}": {
+      "schema": "UserResume",
+      "description": "User's private resumes"
+    },
+    "resumes/{resumeId}": {
+      "schema": "GlobalResume",
+      "description": "Global public/anonymous resumes"
+    }
+  }
+}
